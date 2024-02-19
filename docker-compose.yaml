@@ -2,7 +2,9 @@ version: '3'
 services:
   question-answering-chatbot:
     image: question-answering-chatbot:latest
-    build: ./app
+    build:
+      context: ./
+      dockerfile: Dockerfile
     command: ["python", "main.py"]
     volumes:
       - ./:/app/
