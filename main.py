@@ -13,7 +13,7 @@ from dotenv import load_dotenv, find_dotenv
 from langchain.vectorstores import Pinecone
 
 app = FastAPI()
-templates = Jinja2Templates(directory="templates\\")
+templates = Jinja2Templates(directory="templates")
 vectorestore: Optional[Pinecone] = None
 pinecone_index = "sindabad"
 

@@ -100,7 +100,6 @@ notebook_shim==0.2.3
 numexpr==2.8.4
 numpy==1.25.1
 openai==0.27.8
-openapi-schema-pydantic==1.2.4
 orjson==3.9.2
 outcome==1.2.0
 overrides==7.4.0
@@ -121,10 +120,6 @@ psutil==5.9.5
 pure-eval==0.2.2
 pyarrow==12.0.1
 pycparser==2.21
-pydantic==1.10.12
-pydantic-extra-types==2.0.0
-pydantic-settings==2.0.2
-pydantic_core==2.3.0
 pydeck==0.8.0
 Pygments==2.15.1
 Pympler==1.0.1
@@ -138,8 +133,6 @@ python-json-logger==2.0.7
 python-multipart==0.0.6
 pytz==2023.3
 pytz-deprecation-shim==0.1.0.post0
-pywin32==306
-pywinpty==2.0.11
 PyYAML==6.0.1
 pyzmq==25.1.1
 qtconsole==5.4.3
@@ -201,7 +194,6 @@ webencodings==0.5.1
 websocket-client==1.6.1
 websockets==11.0.3
 widgetsnbextension==4.0.8
-win32-setctime==1.1.0
 wsproto==1.2.0
 yarl==1.9.2
 zipp==3.16.2
