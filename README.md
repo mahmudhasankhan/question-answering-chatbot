@@ -1,6 +1,13 @@
-# E-commerce Chatbot
+# Question Answering Chatbot
 
-General Idea: We want to use OpenAI's large language models like, GPT-3.5 turbo or GPT-4 and combine with our own data. But there's a key issue LLMs( Large Language Models) can only inspect a few thousand words at a time. Therefore, if we have large data, howcan we get the LLM(large language model) to read all of our data and answer the questions about our data.
+This repo is an implementation of a chatbot that leverages [OpenAI](https://openai.com/)'s LLMs 🧠 that specializes on question answering over your own custom knowledge-base you provide.
+
+Built with [Langchain](https://www.langchain.com/), [FastAPI](https://fastapi.tiangolo.com/), [Pinecone](https://www.pinecone.io/) and [Docker](https://www.docker.com/) for deployment.
+
+
+
+## 📚 General Idea: 
+We want to use OpenAI's large language models like, GPT-3.5 turbo or GPT-4 and combine with our own data. But there's a key issue LLMs( Large Language Models) can only inspect a few thousand words at a time. Therefore, if we have large data, how can we get the LLM(large language model) to read all of our data and answer the questions about our data.
 
 ## That is where, embeddings and vector databases come into play:
 
