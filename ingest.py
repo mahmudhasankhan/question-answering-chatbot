@@ -118,7 +118,7 @@ if __name__ == "__main__":
     parser = argparse.ArgumentParser()
 
     # load file path
-    parser.add_argument("--pdf",
+    parser.add_argument("--file",
                         type=str,
                         default="",
                         help="Enter the pdf file name")
