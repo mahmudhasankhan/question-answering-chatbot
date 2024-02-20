@@ -15,7 +15,6 @@ from langchain.vectorstores import Pinecone
 app = FastAPI()
 templates = Jinja2Templates(directory="templates")
 vectorestore: Optional[Pinecone] = None
-pinecone_index = "sindabad"
 
 
 @app.on_event("startup")
@@ -32,7 +31,8 @@ async def startup_event():
     pinecone.init(api_key=os.environ['PINECONE_API_KEY'],
                   environment=os.environ['PINECONE_ENV'])
     global vectorstore
-    vectorstore = Pinecone.from_existing_index(pinecone_index, embeddings)
+    vectorstore = Pinecone.from_existing_index(
+        os.environ['PINECONE_INDEX_NAME'], embeddings)
 
 
 @app.get("/")
@@ -120,8 +120,8 @@ async def websocket_endpoint(websocket: WebSocket):
 
 def main():
     import uvicorn
-    logging.basicConfig(filename='./logs/test.log',
-                        encoding='utf-8', level=logging.DEBUG)
+    logging.basicConfig(filename='./logs/main.log',
+                        encoding='utf-8', level=logging.INFO)
     uvicorn.run("main:app", host="0.0.0.0", port=8000, reload=True)
 
 

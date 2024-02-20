@@ -3,6 +3,7 @@ import os
 import pdfplumber
 import re
 import pinecone
+import logging
 
 from typing import Callable, List, Tuple, Dict
 from dotenv import load_dotenv, find_dotenv
@@ -111,6 +112,9 @@ def text_to_docs(text: List[str], metadata: Dict[str, str]) -> List[Document]:
 if __name__ == "__main__":
     _ = load_dotenv(find_dotenv())
 
+    logging.basicConfig(filename='./logs/ingest.log',
+                        encoding='utf-8', level=logging.INFO)
+
     parser = argparse.ArgumentParser()
 
     # load file path
@@ -118,40 +122,41 @@ if __name__ == "__main__":
                         type=str,
                         default="",
                         help="Enter the pdf file name")
-    parser.add_argument("--db",
-                        type=str,
-                        default=None,
-                        help="Enter pinecone index name")
 
     args = parser.parse_args()
 
-    if args.db is None:
-        raise Exception("Pinecone index name must not be none!")
-
+    logging.info("Extracting pages and metadata from the pdf")
     raw_pages, metadata = parse_pdf(os.path.join(os.getcwd(),
                                                  args.pdf))
+    logging.info("Cleaning extracted pages")
     cleaned_text_pdf = clean_text(raw_pages, cleaning_functions)
+    logging.info("Loading documents in chunks from the cleaned pages")
     document_chunks = text_to_docs(cleaned_text_pdf, metadata)
 
     # HuggingFaceEmbeddings
-
     model_name = "sentence-transformers/all-mpnet-base-v2"
     model_kwargs = {'device': 'cpu'}
     encode_kwargs = {'normalize_embeddings': True}
 
+    logging.info("Initializing hunggingface embedding model configuration")
     embeddings = HuggingFaceEmbeddings(model_name=model_name,
                                        model_kwargs=model_kwargs,
                                        encode_kwargs=encode_kwargs)
 
     # initialize pinecone
+    logging.info("Initializing pinecone vectorstore")
     pinecone.init(api_key=os.environ['PINECONE_API_KEY'],
                   environment=os.environ['PINECONE_ENV'])
 
-    print(f"Creating new index {args.db}")
-    pinecone.create_index(name=args.db,
+    logging.info(
+        f"Creating new vectorstore index {os.environ['PINECONE_INDEX_NAME']}")
+    pinecone.create_index(name=os.environ['PINECONE_INDEX_NAME'],
                           dimension=embeddings.client[1].word_embedding_dimension,
                           metric='cosine',
                           pods=1,
                           replicas=1,
                           pod_type="p1")
-    Pinecone.from_documents(document_chunks, embeddings, index_name=args.db)
+
+    logging.info("Connecting pinecone index and inserting chunked docs")
+    Pinecone.from_documents(document_chunks, embeddings,
+                            index_name=os.environ['PINECONE_INDEX_NAME'])
