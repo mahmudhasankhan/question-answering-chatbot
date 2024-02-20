@@ -32,9 +32,9 @@ Use any of the two package managers you prefer.
     - Run command `conda env create -f environment.yml`
 
 ### Run your Chatbot 
-1. Run `python ingest.py --file filepath` with your pdf file path to ingest pdf doc chunks ino the Pinecone vectorstore (only needs to be done once). Note: If you want to test out my chatbot to see how it works, you can avoid this step.
+1. Run `python ingest.py --file filepath` with your pdf file path to ingest pdf doc chunks ino the Pinecone vectorstore (only needs to be done once).
 2. Start the app by running `python main.py` 
-3. Open [localhost:8000](localhost:8000) in your browser
+3. Open [localhost:8000](http://localhost:8000) in your browser
 
 
 ## 🐳 Run with Docker (Recommended)
@@ -48,7 +48,7 @@ Use any of the two package managers you prefer.
 
 3. It may take a while to download and install all the dependencies, so be patient! 🙏
 
-4. Open [localhost:8000](localhost:8000) in your browser.
+4. Open [localhost:8000](http://localhost:8000) in your browser.
 
 5. To stop the container, run 
     ```
