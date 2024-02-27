@@ -10,7 +10,7 @@ Clone the repo
 ```
 https://github.com/mahmudhasankhan/question-answering-chatbot.git
 ```
-You need to create a .env file to setup necessary environment variables.
+You need to create a .env file to setup necessary environment variables. If you have prepared your own pdf then you would require PINECONE environment variables, otherwise you don't have to. You could just test out the app with the default context the app gets.
 
 ```
 OPENAI_API_KEY=
@@ -33,6 +33,7 @@ Use any of the two package managers you prefer.
 
 ### Run your Chatbot 
 1. Run `python ingest.py --file filepath` with your pdf file path to ingest pdf doc chunks ino the Pinecone vectorstore (only needs to be done once).
+You should follow this step only if you have your own knowledge-base prepared in a pdf format. Otherwise skip this step.
 2. Start the app by running `python main.py` 
 3. Open [localhost:8000](http://localhost:8000) in your browser
 
@@ -91,4 +92,5 @@ Question-Answering has the following steps:
 2. Given that standalone question, look up top 4 similar document chunks from the Pinecone vectorstore.
 3. Pass the standalone question and relevant documents to the model to generate and stream the final answer.
 
-
+## Future Work 🙄
+Do it with CSV instead of a pdf file.
