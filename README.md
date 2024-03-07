@@ -6,7 +6,7 @@ Built with [Langchain](https://www.langchain.com/), [FastAPI](https://fastapi.ti
 
 ## Architecture
 <p>
-    <img src='./assets/images/workflow.PNG' alt="Architecture">
+    <img src='./assets/images/workflow.png' alt="Architecture">
 </p>
 
 ## Setup
