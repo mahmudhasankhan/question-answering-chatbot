@@ -4,6 +4,11 @@ This repo is an implementation of a chatbot that leverages [OpenAI](https://open
 
 Built with [Langchain](https://www.langchain.com/), [FastAPI](https://fastapi.tiangolo.com/), [Pinecone](https://www.pinecone.io/) and [Docker](https://www.docker.com/) for deployment 🚀
 
+## Architecture
+<p>
+    <img src='./assets/images/workflow.PNG' alt="Architecture">
+</p>
+
 ## Setup
 
 Clone the repo
