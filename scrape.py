@@ -144,7 +144,7 @@ def main():
 
     logging.info("Saving the data into a csv file")
     if os.path.exists(PATH):
-        print(f"existing csv file exists at {PATH}")
+        print(f"csv file exists at {PATH}")
         dataframe.to_csv(PATH, mode="a", header=False, index=False)
     else:
         print(f"file doesn't exist, creating at {PATH}")
