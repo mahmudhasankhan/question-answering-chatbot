@@ -37,7 +37,7 @@ def sub_category_link_scraper(args, driver):
         driver = webdriver.Chrome()
         driver.get(URL)
 
-    time.sleep(8)
+    time.sleep(15)
     soup = BeautifulSoup(driver.page_source, "html.parser")
 
     special_divs = soup.find_all(
@@ -64,7 +64,7 @@ def product_link_scraper(driver, sub_category_links):
         #     break
         url = "https://sindabad.com" + url
         driver.get(url)
-        time.sleep(8)
+        time.sleep(15)
         soup = BeautifulSoup(driver.page_source, "html.parser")
         special_divs = soup.find_all(
             'div', {'class': PRODUCT_CLASS_ATTR})
@@ -94,7 +94,7 @@ def product_scraper(driver, product_links):
         #     break
         product_link = "https://sindabad.com" + link
         driver.get(product_link)
-        time.sleep(8)
+        time.sleep(15)
         soup = BeautifulSoup(driver.page_source, "html.parser")
         product_desc = soup.find(
             "div", {"class": PRODUCT_DIV_CLASS_ATTR})
