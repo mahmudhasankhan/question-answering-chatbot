@@ -1,15 +1,16 @@
 """Create a ChatVectorDBChain for question/answering."""
 from langchain.callbacks.manager import AsyncCallbackManager
 from langchain.callbacks.tracers import LangChainTracer
-from langchain.chains import ChatVectorDBChain
-from langchain.chains.chat_vector_db.prompts import (CONDENSE_QUESTION_PROMPT,
-                                                     QA_PROMPT)
+# from langchain.chains import ChatVectorDBChain
+from langchain.chains.chat_vector_db.prompts import CONDENSE_QUESTION_PROMPT
 from langchain.chains.llm import LLMChain
 from langchain.chains.question_answering import load_qa_chain
-from langchain.chat_models import ChatOpenAI
-from langchain.llms import OpenAI
-from langchain.vectorstores import Pinecone
+# from langchain.chat_models import ChatOpenAI
+# from langchain.llms import OpenAI
+# from langchain.vectorstores import Pinecone
+from langchain_pinecone import PineconeVectorStore
 from langchain.chains import ConversationalRetrievalChain
+from langchain_groq import ChatGroq
 
 from langchain.prompts.chat import (
     ChatPromptTemplate,
@@ -48,11 +49,11 @@ prompt = ChatPromptTemplate.from_messages(messages)
 
 
 def get_chain(
-    vectorstore: Pinecone,
+    vectorstore: PineconeVectorStore,
     question_handler,
     stream_handler,
     tracing: bool = False
-) -> ChatVectorDBChain:
+):
     """Create a ChatVectorDBChain for question/answering."""
     # Construct a ChatVectorDBChain with a streaming llm for combine docs
     # and a separate, non-streaming llm for question generation
@@ -66,12 +67,14 @@ def get_chain(
         question_manager.add_handler(tracer)
         stream_manager.add_handler(tracer)
 
-    question_gen_llm = ChatOpenAI(
+    question_gen_llm = ChatGroq(
+        model_name="mixtral-8x7b-32768",
         temperature=0,
         verbose=True,
         callback_manager=question_manager,
     )
-    streaming_llm = ChatOpenAI(
+    streaming_llm = ChatGroq(
+        model_name="mixtral-8x7b-32768",
         streaming=True,
         callback_manager=stream_manager,
         verbose=True,
